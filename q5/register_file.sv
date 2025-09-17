@@ -1,4 +1,4 @@
-module registerfile (input logic clk,
+module register_file (input logic clk,
                      input logic rst_n,
                      input logic write_en,
                      input logic [3:0] write_addr,
@@ -19,3 +19,4 @@ end
 assign data_out1 = register[read_addr1];
 assign data_out2 = register[read_addr2];
 endmodule
+
