@@ -7,6 +7,24 @@ module up_down_counter #(parameter N = 4)
                         output logic [N-1:0] count_out,
                         output logic carry_out);
   
-  // complete here
+logic carry;
+logic [N-1:0]temp_counter;
+
+always_ff @(posedge clk or negedge rst_n) begin : count_logic
+    if(!rst_n) begin
+        temp_counter <= '0;
+        carry <= 0;
+    end
+        else if(load)
+            temp_counter <= input_load;
+        else if(up_down)
+            {carry, temp_counter} = temp_counter + 1;
+        else if(!up_down)
+            {carry, temp_counter} = temp_counter -1;
+end : count_logic
+
+assign count_out = temp_counter;
+assign carry_out = carry;
+
 
 endmodule
